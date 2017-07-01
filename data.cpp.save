@@ -1,0 +1,16 @@
+#include <omp.h>
+#include <iostream>
+#include <stdlib.h>
+
+int main(){
+	int result=0;
+	#pragma openmp parallel for private(j) schedule(dynamic,10) {
+		for(int i=0 ;i < 99; i++)
+			for(int j=i+1; j< 100; j++){
+				sleep(j);
+
+    			printf("Thread %d has completed iteration %d.\n", omp_get_thread_num( ), j);
+			}
+	}
+	std::cout<<result<<std::endl;
+}
